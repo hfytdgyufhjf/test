@@ -13,7 +13,7 @@ RUN mkdir -p /data/shadowsocks; cd /data/shadowsocks  \
     && cd  /data/shadowsocks/shadowsocksr-manyuser  \   
     && cp -r /data/shadowsocks/shadowsocks/*  /ssr  \
     && mv * ..   \
-    && rm -rf /data
+    #&& rm -rf /data
 RUN rm -rf /var/cache/apk/* ~/.cache 
 
 WORKDIR /data/shadowsocks/
