@@ -9,7 +9,7 @@ RUN ssh-keygen -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -N ''
 RUN ssh-keygen -t ed25519 -f /etc/ssh/ssh_host_ed25519_key -N ''
 RUN mkdir -p /ssr;
 RUN mkdir -p /data/shadowsocks; cd /data/shadowsocks  \
-    && curl -sS https://codeload.github.com/shadowsocksr/shadowsocksr/tar.gz/manyuser | tar zxvf - \
+    && curl -sS https://codeload.github.com/shadowsocksr-backup/shadowsocksr/tar.gz/manyuser | tar zxvf - \
     && cd  /data/shadowsocks/shadowsocksr-manyuser  \   
     && cp -r /data/shadowsocks/shadowsocks/*  /ssr  \
     && mv * ..   \
