@@ -7,13 +7,10 @@ RUN ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N ''
 RUN ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key -N ''
 RUN ssh-keygen -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -N ''
 RUN ssh-keygen -t ed25519 -f /etc/ssh/ssh_host_ed25519_key -N ''
-RUN mkdir -p /ssr
 RUN mkdir -p /data/shadowsocks; cd /data/shadowsocks  \
     && curl -sS https://codeload.github.com/shadowsocksr-backup/shadowsocksr/tar.gz/manyuser | tar zxvf - \
     && cd  /data/shadowsocks/shadowsocksr-manyuser  \   
-    && cp -r /data/shadowsocks/shadowsocksr-manyuser/shadowsocks/*  /ssr  \
-    && mv * ..   \
-    && rm -rf /data
+    && mv * ..   \   
 RUN rm -rf /var/cache/apk/* ~/.cache 
 
 WORKDIR /data/shadowsocks/
