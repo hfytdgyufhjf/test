@@ -11,7 +11,7 @@ RUN mkdir -p /data/shadowsocks  \
     && cd /data/shadowsocks   \
     && curl -sS https://codeload.github.com/shadowsocksr-backup/shadowsocksr/tar.gz/manyuser | tar zxvf - \
     && cd  /data/shadowsocks/shadowsocksr-manyuser  \   
-    && mv * ..   \   
+    && mv /data/shadowsocks/shadowsocksr-manyuser/data/shadowsocks/shadowsocksr-manyuser* ..   \   
 RUN rm -rf /var/cache/apk/* ~/.cache 
 
 WORKDIR /data/shadowsocks/
