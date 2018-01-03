@@ -60,6 +60,13 @@ tr -d '\r' < /tmp/blackholeconfig > $configurationFile
 rm -f /tmp/blackhole
 rm -f /tmp/blackholeuniq
 rm -f /tmp/blackholeconfig
-
+if [ -s /root/hosts ]; then
+echo " /root/hosts [found]"
+else
+echo "Error:  /root/hosts not found!!!download now......"
+cp /etc/hosts /root/hosts
+fi
+cat /root/hosts >/etc/hosts
+cat /tmp/host >> /etc/hosts
 # Confirm completion
 echo "Installed blocklist and set to update daily"
