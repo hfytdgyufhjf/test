@@ -1,6 +1,6 @@
 curl "https://raw.githubusercontent.com/hfytdgyufhjf/test/master/client-common.txt" -o /etc/openvpn/client-common.txt
 IP=$(curl -s ipv4.icanhazip.com)
-cp /etc/openvpn/client-common.txt ~/ml.ovpn
+yes | cp /etc/openvpn/client-common.txt ~/ml.ovpn
 echo "http-proxy    $IP  80" >> ~/ml.ovpn
         echo "<ca>" >> ~/ml.ovpn
         cat /etc/openvpn/easy-rsa/pki/ca.crt >> ~/ml.ovpn
