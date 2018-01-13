@@ -1,0 +1,25 @@
+client
+dev tun
+proto tcp
+sndbuf 0
+rcvbuf 0
+remote   127.0.0.1 443 tcp
+http-proxy-option EXT1 "GET http://iread.wo.com.cn"
+http-proxy-option EXT1 "POST http://iread.wo.com.cn"
+http-proxy-option EXT1 "X-Online-Host: iread.wo.com.cn"
+http-proxy-option EXT1 "Host: iread.wo.com.cn"
+keepalive       10 60  
+resolv-retry infinite
+nobind
+persist-key
+persist-tun
+remote-cert-tls server
+cipher AES-128-CBC
+comp-lzo
+<http-proxy-user-pass>
+solifd
+solifd.com
+</http-proxy-user-pass>
+setenv opt block-outside-dns
+key-direction 1
+verb 3"
