@@ -10,6 +10,6 @@ curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compos
 chmod +x /usr/local/bin/docker-compose
 curl "https://raw.githubusercontent.com/ssolifd/1/master/docker-compose.yml" -o docker-compose.yml
 docker-compose up -d
-wget http://soli-10006287.cos.myqcloud.com/tx.zip
- docker run --name unbound -d -p 53:53/udp -p 53:53 cdrocker/unbound
+#wget http://soli-10006287.cos.myqcloud.com/tx.zip
+ #docker run --name unbound -d -p 53:53/udp -p 53:53 cdrocker/unbound
 
