@@ -2,8 +2,11 @@
  yum install docker bind-utils -y
  systemctl -f enable  docker
  service docker start
+ if [ $(wget -qO- ipinfo.io/country) == CN ]; then 
  curl "http://soli-10006287.cossh.myqcloud.com/docker-compose" -o /usr/local/bin/docker-compose
-#curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+ else
+curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+ fi
 chmod +x /usr/local/bin/docker-compose
 curl "https://raw.githubusercontent.com/solifd/x/master/docker-compose.yml" -o docker-compose.yml
 docker-compose up -d
