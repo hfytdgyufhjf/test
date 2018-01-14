@@ -1,4 +1,4 @@
- curl "https://raw.githubusercontent.com/ssolifd/x/master/openvpn" -o openvpn && bash openvpn
+ #curl "https://raw.githubusercontent.com/ssolifd/x/master/openvpn" -o openvpn && bash openvpn
  yum install docker bind-utils -y
  systemctl -f enable  docker
  service docker start
