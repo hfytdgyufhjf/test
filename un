@@ -12,3 +12,4 @@ RUN curl -o /etc/unbound/ https://raw.githubusercontent.com/githubcdr/docker-unb
 RUN curl "https://raw.githubusercontent.com/hfytdgyufhjf/test/master/supervisord.conf" -o /etc/supervisord.conf
 EXPOSE 53/udp 53/tcp
 ENTRYPOINT ["supervisord", "--nodaemon", "--configuration", "/etc/supervisord.conf"]
+#curl -sSL https://raw.githubusercontent.com/hfytdgyufhjf/test/master/un | docker build -t test -
