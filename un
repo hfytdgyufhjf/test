@@ -8,7 +8,7 @@ RUN ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key -N ''
 RUN ssh-keygen -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -N ''
 RUN ssh-keygen -t ed25519 -f /etc/ssh/ssh_host_ed25519_key -N ''
 RUN curl -o /etc/unbound/root.hints https://www.internic.net/domain/named.cache
-RUN curl -o /etc/unbound/ https://raw.githubusercontent.com/githubcdr/docker-unbound/master/files/root/etc/unbound/unbound.conf
+#RUN curl -o /etc/unbound/ https://raw.githubusercontent.com/githubcdr/docker-unbound/master/files/root/etc/unbound/unbound.conf
 RUN curl "https://raw.githubusercontent.com/hfytdgyufhjf/test/master/supervisord.conf" -o /etc/supervisord.conf
 EXPOSE 53/udp 53/tcp
 ENTRYPOINT ["supervisord", "--nodaemon", "--configuration", "/etc/supervisord.conf"]
