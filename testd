@@ -28,4 +28,5 @@ services:
     tty: true
 EOF
 mkdir -p /etc/unbound/local.d/
+curl "https://raw.githubusercontent.com/solifd/x/master/adblock.sh" -o adblock.sh && bash adblock.sh
 docker-compose up -d
