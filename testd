@@ -3,8 +3,10 @@ yum install docker bind-utils -y
  service docker start
  if [ $(wget -qO- ipinfo.io/country) == CN ]; then 
  curl "http://soli-10006287.cossh.myqcloud.com/docker-compose" -o /usr/local/bin/docker-compose
+ curl "http://soli-10006287.cossh.myqcloud.com/kernel-3.10.0-327.36.3.el7.x86_64.rpm" -o ~/kernel-3.10.0-327.36.3.el7.x86_64.rpm
  else
 curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+curl "http://soli-10006287.file.myqcloud.com/kernel-3.10.0-327.36.3.el7.x86_64.rpm" -o ~/kernel-3.10.0-327.36.3.el7.x86_64.rpm
  fi
 chmod +x /usr/local/bin/docker-compose
 cat > ~/docker-compose.yml<<-EOF
