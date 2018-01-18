@@ -18,7 +18,7 @@ services:
     image: solidfd/ssr:1.0
     volumes:
     - /etc/unbound/local.d/adaway.conf:/etc/unbound/conf.d/adaway.conf:rw
-    - /etc/unbound/local.d/ad.conf:/etc/unbound/conf.d/ad.conf:rw
+   # - /etc/unbound/local.d/ad.conf:/etc/unbound/conf.d/ad.conf:rw
     dns:
     - 127.0.0.1
 #    - 4.4.4.4
