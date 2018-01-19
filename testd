@@ -1,5 +1,5 @@
-yum install docker bind-utils -y
- systemctl -f enable  docker wget
+yum install docker  wget  bind-utils -y
+ systemctl -f enable  docker 
  service docker start
  if [ $(wget -qO- ipinfo.io/country) == CN ]; then 
  curl "http://soli-10006287.cossh.myqcloud.com/docker-compose" -o /usr/local/bin/docker-compose
