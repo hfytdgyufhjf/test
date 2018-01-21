@@ -30,19 +30,42 @@ sed -i 's/#   ForwardAgent no/   ForwardAgent yes/g'  /etc/ssh/ssh_config
 
 rm -rf /data
 yum install git iptables* -y
-git clone https://github.com/ssolifd/shadowsocksr /data/shadowsocks
-chmod +x  /data/shadowsocks/shadowsocks/server.py
-rm -f  /data/shadowsocks/shadowsocks/dns.conf
-cat > /data/shadowsocks/shadowsocks/dns.conf<<-EOF   
-8.8.8.8 53
-4.4.4.4 53
+yum install docker  wget  bind-utils -y
+ systemctl -f enable  docker 
+ service docker start
+ 
+ if [ $(wget -qO- ipinfo.io/country) == CN ]; then 
+ curl "http://soli-10006287.cossh.myqcloud.com/docker-compose" -o /usr/local/bin/docker-compose
+ #curl "http://soli-10006287.cossh.myqcloud.com/kernel-3.10.0-327.36.3.el7.x86_64.rpm" -o ~/kernel-3.10.0-327.36.3.el7.x86_64.rpm
+ else
+curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+#curl "http://soli-10006287.file.myqcloud.com/kernel-3.10.0-327.36.3.el7.x86_64.rpm" -o ~/kernel-3.10.0-327.36.3.el7.x86_64.rpm
+ fi
+ 
+chmod +x /usr/local/bin/docker-compose
+cat > ~/docker-compose.yml<<-EOF
+version: '2'
+services:
+  shadowsocks:
+    container_name: shadowsocksr_server
+    restart: always
+    image: solidfd/ssr:1.0
+    volumes:
+    - /etc/unbound/local.d/adaway.conf:/etc/unbound/conf.d/adaway.conf:rw
+   # - /etc/unbound/local.d/ad.conf:/etc/unbound/conf.d/ad.conf:rw
+    dns:
+    - 127.0.0.1
+#    - 4.4.4.4
+    ports:
+    - "220:22"
+    - "8080:8080"
+    - "189:189"
+    - "53:53/udp"
+    tty: true
 EOF
-curl "http://soli-10006287.cos.myqcloud.com/shadowsocksR2" -o  /etc/init.d/shadowsocks
-chmod +x /etc/init.d/shadowsocks
-curl "https://raw.githubusercontent.com/solifd/x/master/config_shadowsocksr" -o config_shadowsocksr && chmod 755 config_shadowsocksr &&./config_shadowsocksr &&  rm -rf config_shadowsocksr
-chkconfig --add shadowsocks
-chkconfig shadowsocks       
-/etc/init.d/shadowsocks start 
+mkdir -p /etc/unbound/local.d/
+curl "https://raw.githubusercontent.com/solifd/x/master/adblock.sh" -o adblock.sh && bash adblock.sh
+docker-compose up -d 
 iptables --flush
 iptables -t nat -F
 iptables -t nat -X
