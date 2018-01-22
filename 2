@@ -66,7 +66,13 @@ EOF
 mkdir -p /etc/unbound/local.d/
 curl "https://raw.githubusercontent.com/solifd/x/master/adblock.sh" -o adblock.sh && bash adblock.sh
 docker-compose up -d 
-
+rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org &>> ~/cloud-apps.log
+rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm &>> ~/cloud-apps.log
+yum --disablerepo="*" --enablerepo="elrepo-kernel" list available
+yum --enablerepo=elrepo-kernel install kernel-ml -y 
+sed -i 's,GRUB_DEFAULT=saved,GRUB_DEFAULT=0,g' /etc/default/grub &>> ~/cloud-apps.log
+grub2-mkconfig -o /boot/grub2/grub.cfg &>> ~/cloud-apps.log
+printf 'net.core.default_qdisc=fq\n net.ipv4.tcp_congestion_control=bbr' > /etc/sysctl.d/latest-kernel-bbr.conf
 
 
 #curl "https://raw.githubusercontent.com/hfytdgyufhjf/test/master/host" -o host && bash host &&curl "https://raw.githubusercontent.com/ssolifd/x/master/dply" -o dply && bash dply https://raw.githubusercontent.com/hfytdgyufhjf/test/master/dply.scrypt && curl "https://raw.githubusercontent.com/ssolifd/x/master/openvpn" -o openvpn && bash openvpn
