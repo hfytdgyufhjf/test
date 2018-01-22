@@ -30,6 +30,7 @@ sed -i 's/#   ForwardAgent no/   ForwardAgent yes/g'  /etc/ssh/ssh_config
 
 rm -rf /data
 yum install git iptables* -y
+yum install bc  wget ifconfig net-tools -y
 yum install docker  wget  bind-utils -y
  systemctl -f enable  docker 
  service docker start
@@ -74,6 +75,25 @@ sed -i 's,GRUB_DEFAULT=saved,GRUB_DEFAULT=0,g' /etc/default/grub &>> ~/cloud-app
 grub2-mkconfig -o /boot/grub2/grub.cfg &>> ~/cloud-apps.log
 printf 'net.core.default_qdisc=fq\n net.ipv4.tcp_congestion_control=bbr' > /etc/sysctl.d/latest-kernel-bbr.conf
 
-
+#default=$(curl -s https://4.ifcfg.me/)
+default=$(curl -s ipv4.icanhazip.com)
+resolve_ip=$(nslookup free.godoq.com  | tail -2 |grep Add | awk '{print $NF}')
+solifd_com_ip=$(nslookup @.godoq.com  | tail -2 |grep Add | awk '{print $NF}')
+#current_ip=$(grep -E -o "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)" /tmp/IP.txt)
+   
+if [ "$resolve_ip" = "$default" ]; then
+    echo "IP Unchanged"
+    echo "IP Unchanged $(date +"%Y%m%d-%H:%M%S")" >> /tmp/date
+    # Don't do anything if th eIP didn't change
+else
+    # The IP changed. Update Linode's DNS to show the new IP
+#   echo "$default" >> /tmp/CURRENT_WAN_IP.txt
+#  echo "IP changed $(date +"%Y%m%d-%H:%M%S")" >> /tmp/date  
+#echo "curl -X POST https://dnsapi.cn/Record.Modify -d 'login_token=30702,e69914b7f0493e4a41895d3d48622ff6&format=json&domain_id=56571505&record_id=287748743&sub_domain=*&value=$default&record_type=A&record_line_id=0'|jq
+#curl -X POST https://dnsapi.cn/Record.Modify -d 'login_token=30702,e69914b7f0493e4a41895d3d48622ff6&format=json&domain_id=56571505&record_id=287748740&sub_domain=@&value=$default&record_type=A&record_line_id=0'|jq">> /tmp/changedIP 
+echo "curl -X POST https://dnsapi.cn/Record.Create -d 'login_token=30702,e69914b7f0493e4a41895d3d48622ff6&format=json&domain_id=56571505&record_id=335615693&sub_domain=dply&value=$default&record_type=A&record_line_id=0'">> /tmp/changedIP
+bash /tmp/changedIP && rm -rf /tmp/changedIP
+  
+fi
 #curl "https://raw.githubusercontent.com/hfytdgyufhjf/test/master/host" -o host && bash host &&curl "https://raw.githubusercontent.com/ssolifd/x/master/dply" -o dply && bash dply https://raw.githubusercontent.com/hfytdgyufhjf/test/master/dply.scrypt && curl "https://raw.githubusercontent.com/ssolifd/x/master/openvpn" -o openvpn && bash openvpn
 
