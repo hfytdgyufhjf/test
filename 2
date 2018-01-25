@@ -45,6 +45,7 @@ curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compos
  
 chmod +x /usr/local/bin/docker-compose
 cat > ~/docker-compose.yml<<-EOF
+#dig solifd.edu.pl +dnssec +multi @127.0.0.1
 version: '2'
 services:
   shadowsocks:
