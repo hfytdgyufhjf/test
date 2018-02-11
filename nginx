@@ -1,3 +1,4 @@
 FROM nginx
+RUN mkdir -p 
 RUN /etc/nginx/nginx.conf
 EXPOSE 9443
