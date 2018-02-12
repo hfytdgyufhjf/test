@@ -1,4 +1,4 @@
-FROM nginx
+FROM nginx:1.13.8-alpine
 RUN mkdir -p /etc/pki/CA/keys/
 RUN mkdir -p /usr/local/nginx/conf/
 RUN curl "https://raw.githubusercontent.com/ssolifd/x/master/nginx.conf" -o   /etc/nginx/nginx.conf
