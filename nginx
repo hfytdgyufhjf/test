@@ -1,4 +1,8 @@
 FROM nginx
-RUN mkdir -p 
-RUN /etc/nginx/nginx.conf
+RUN mkdir -p /etc/pki/CA/keys/
+RUN mkdir -p /usr/local/nginx/conf/
+RUN curl "https://raw.githubusercontent.com/ssolifd/x/master/nginx.conf" -o   /etc/nginx/nginx.conf
+RUN https://raw.githubusercontent.com/ssolifd/1/master/files/1_dply.godoq.com_bundle.crt" -o /etc/pki/CA/keys/server.crt
+RUN https://raw.githubusercontent.com/ssolifd/1/master/files/1_dply.godoq.com_bundle.crt" -o /etc/pki/CA/keys/server.crt
+RUN openssl dhparam -out /etc/pki/CA/keys/dhparams.pem 2048
 EXPOSE 9443
