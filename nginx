@@ -7,3 +7,7 @@ RUN curl "https://raw.githubusercontent.com/ssolifd/1/master/files/1_dply.godoq.
 RUN curl "https://raw.githubusercontent.com/ssolifd/1/master/files/RootCA.crt" -o /etc/pki/CA/keys/RootCA.crt
 RUN curl "https://raw.githubusercontent.com/ssolifd/1/master/files/dhparams.pem" -o  /etc/pki/CA/keys/dhparams.pem 
 EXPOSE 9443
+
+STOPSIGNAL SIGTERM
+
+CMD ["nginx", "-g", "daemon off;"]
