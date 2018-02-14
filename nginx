@@ -2,6 +2,7 @@ FROM nginx:1.13.8-alpine
 RUN apk --update add  curl
 RUN mkdir -p /etc/pki/CA/keys/
 RUN mkdir -p /usr/local/nginx/conf/
+RUN mkdir -p /www
 RUN curl "https://raw.githubusercontent.com/ssolifd/x/master/dockernginx" -o   /etc/nginx/nginx.conf
 RUN curl "https://raw.githubusercontent.com/ssolifd/1/master/files/1_dply.godoq.com_bundle.crt" -o /etc/pki/CA/keys/server.crt
 RUN curl "https://raw.githubusercontent.com/ssolifd/1/master/files/2_dply.godoq.com.key" -o /etc/pki/CA/keys/server.key
